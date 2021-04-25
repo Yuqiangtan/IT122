@@ -1,0 +1,15 @@
+<html>
+    <body>
+        <a href="/">Home</a>
+{{#if result}}
+    <h2>{{title}} Student Name:</h2>
+    <li>name: {{result.name}}</li>
+    <p>
+    <a href="/">Go back to Home</a>
+    </p>
+{{else}}
+        <h2>{{title}} not found</h2>
+{{/if}}
+
+    </body>
+</html>
