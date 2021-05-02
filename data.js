@@ -1,4 +1,4 @@
-export let students = [
+let students = [
     { name : "tom", age : 24, classes : ["itc298", "cs110"],gender:"male"},
     { name : "jack", age : 69, classes : ["web150", "cs110"],gender:"male" },
     { name : "bin", age : 27, classes : ["web150", "web120"],gender:"male" },
@@ -13,14 +13,35 @@ export let students = [
 //     });
 // }
 //  console.log(getAll())
-export let getAll = () =>{
+const getAll = () =>{
     return students;
 };
 
 
-export let getItem = (name) =>{
+const getItem = (name) =>{
      return   students.find((student) => {
         return student.name === name;
     });
 }
-//  console.log(getItem("Alan"))
+
+const addItem = (newName) =>{
+    const oldLength = students.length;
+    let found = getItem(newName.name);
+    if(!found){
+        students.push(newName);
+    }
+
+    return {added:oldLength !== students.length, total:students.length};
+
+}
+
+const deleteItem = (name) =>{
+    const oldLength = students.length;
+    students = students.filter((item) =>{
+        return item.name !== name;
+    });
+
+    return {deleted: oldLength !== students.length, total:students.length};
+}
+
+export{getAll, getItem, addItem, deleteItem}
