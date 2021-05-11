@@ -1,9 +1,8 @@
 <html>
     <body>
         <a href="/">Home</a>
-{{#if result.deleted}}
-    <h2>{{name}} deleted</h2>
-    remaining total: {{result.total}}
+{{#if result}}
+    <h2>{{name}} Delete success!</h2>
 {{else}}
     <h2>{{name}} not found</h2>
 {{/if}}
