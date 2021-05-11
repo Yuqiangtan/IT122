@@ -44,13 +44,11 @@ app.post('/detail', (req,res, next) => {
 });
 
 app.get('/delete', (req,res) => {
-    Student.remove({ name:req.query.name }, (err, result) => {
+    Student.deleteOne({name:req.query.name }, (err, result) => {
         if (err) return next(err);
-         let deleted = result.result.n !== 0;  // n will be 0 if no docs deleted
-        Student.count((err, total) => {
-             res.type('text/html'); 
-            res.render('delete', {name: req.query.name, deleted: result.result.n !== 0, total: total } );    
-        });
+        // return # of items deleted
+        console.log("Delete success!") 
+        res.render('delete',{name:req.query.name ,result});
     });
 });
 
