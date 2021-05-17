@@ -6,5 +6,6 @@
 <hr>
 <h3>name</h3>
 {{#each data}}
-    <li><a href="/detail?name={{name}}">{{name}}</a></li>
+    <li><a href="/api/detail?name={{name}}">{{name}}</a></li>
+    <li><a href="/api/delete?name={{name}}">Delete {{name}}</a></li>
 {{/each}}
