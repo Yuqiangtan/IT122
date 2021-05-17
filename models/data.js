@@ -18,7 +18,7 @@ mongoose.connection.on('open', () => {
 const studentSchema = new Schema({
  name: { type: String, required: true },
  age: { type: Number, required: true },
- calsses: { type: String, required: true },
+ classes: { type: String, required: true },
  gender: { type: String, required: true },
 });
 
