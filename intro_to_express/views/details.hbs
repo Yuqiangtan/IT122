@@ -2,13 +2,17 @@
     <body>
         <a href="/">Home</a>
 {{#if result}}
-    <h2>{{title}} Student Name:</h2>
+    <h2>{{name}} Student Detail:</h2>
     <li>name: {{result.name}}</li>
+    <li>age: {{result.age}}</li>
+    <li>classes: {{result.classes}}</li>
+    <li>gender: {{result.gender}}</li>
+    <li><a href="/api/delete?name={{name}}">Delete {{name}}</a></li>
     <p>
     <a href="/">Go back to Home</a>
     </p>
 {{else}}
-        <h2>{{title}} not found</h2>
+        <h2>{{name}} not found</h2>
 {{/if}}
 
     </body>
