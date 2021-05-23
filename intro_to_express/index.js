@@ -19,7 +19,8 @@ app.set("view engine", "hbs");
 app.get('/', (req,res) => {
     Student.find({}).lean()
         .then((students) => {
-            res.render('home', { data:students });
+            // res.render('home', { data:students });
+            res.render('home', {students: JSON.stringify(students)});
         })
         .catch(err => next(err));
 });
