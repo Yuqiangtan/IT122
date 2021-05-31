@@ -12,21 +12,14 @@
 <div id="root"></div>
 <script type="text/babel">
 
-    const students = {{{students}}}
-    console.log(students)
+ //   const students = {{{students}}}
+ //   console.log(students)
     /*
     {"_id":"6098953414a7f7f0bc4ce672","name":"alan","age":21,"classes":"csc150, we120","gender":"male"},{"_id":"6098b435e039a3428b64f7e8","name":"tom","age":24,"classes":"itc298, csc110","gender":"male"},{"_id":"6098b7f1e039a3428b64f7ec","name":"jack","age":69,"classes":"web150, web120","gender":"male"},{"_id":"6098b820e039a3428b64f7ed","name":"bin","age":27,"classes":"web150, web120","gender":"male"},{"_id":"6098b83ae039a3428b64f7ee","name":"james","age":24,"classes":"eng150, itc120","gender":"male"},{"_id":"6098b858e039a3428b64f7ef","name":"test1"},{"_id":"609a0c04ad1bd91da72797d4","name":"test3"},{"_id":"609a0c10ad1bd91da72797d5","name":"test2"},{"_id":"60a1fae858425f08f4f7e85c","name":"test5","age":24,"classes":"it122","gender":"male","__v":0}
     */
 
-    //click event handler
-    const showDetail = (event) =>{
-        //<a href={"/api/detail?name="+item.name}>
-        console.log(event.target)
-        console.log(event.target.innerText)
-        console.log(event.target.id)
-        window.location.href = "/api/detail?name=" + event.target.innerText;
-    }
 
+//return a list of students
     const Students = (props) =>{
         //props is an array
         const listItems = props.names.map((item) => 
@@ -36,9 +29,57 @@
         return <ul>{listItems}</ul>
     }
 
-    ReactDOM.render(
-        <div><Students names={students} clickHandler={showDetail}/></div>,
-        document.getElementById('root')
-    );
+    const ItemDetail = (props) => {
+        return <div>
+            <hr />
+            <h3>Student Details</h3>
+            {props.item.name &&<ul>
+                <li>name:{props.item.name}</li>
+                <li>age:{props.item.age}</li>
+                <li>classes:{props.item.classes}</li>
+                <li>gender:{props.item.gender}</li>
+            </ul>
+            }
+            </div>
+    }
+
+    class StudentApp extends React.Component {
+        constructor(props) {
+        super(props);
+        this.state = {
+            items: {{{students}}},
+            currentItem:{}
+            };
+            this.selectItem = this.selectItem.bind(this);
+        }
+
+        //click event handler
+        selectItem = (event) =>{
+           //<a href={"/api/detail?name="+item.name}>
+           console.log(event.target)
+           console.log(event.target.innerText)
+           console.log(event.target.id)
+           const found = this.state.items.find((item) => {
+               return item.name === event.target.innerText;
+           });
+           this.setState({currentItem:found})
+         //  window.location.href = "/api/detail?name=" + event.target.innerText;
+        }
+
+    render() {
+        return ( 
+            <div> <h2>Inventory</h2>
+                <Students names={this.state.items} clickHandler={this.selectItem}/>
+                <ItemDetail item={this.state.currentItem} />
+            </div> );
+        }
+    }
+
+    ReactDOM.render(  <StudentApp />,  document.getElementById('root') );
+
+//    ReactDOM.render(
+//        <div><Students names={students} clickHandler={showDetail}/></div>,
+//       document.getElementById('root')
+//   );
 
 </script>
